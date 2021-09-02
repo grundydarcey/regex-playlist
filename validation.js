@@ -1,11 +1,13 @@
 const inputs = document.querySelectorAll('input');
 
 const patterns = {
-  telephone: /^\d[11]$/
+  telephone: /^\d{11}$/,
+  username: /^[a-z\d]{5,12}$/i,
+  password: /^[\d\w@-]{8,20}$/i,
+  slug: /^[a-z\d-]{8,20}$/
 };
 
 function validate(field, regex) {
-  //console.log(regex.test(field.value));
   if (regex.test(field.value)) {
     field.className = 'valid';
   } else {
@@ -15,7 +17,6 @@ function validate(field, regex) {
 
 inputs.forEach((input) => {
   input.addEventListener('keyup', (e) => {
-    //console.log(e.target.attributes.name.value);
     validate(e.target, patterns[e.target.attributes.name.value]);
   });
 });
